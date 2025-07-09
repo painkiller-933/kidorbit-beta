@@ -252,6 +252,7 @@ export const Homepage = () => {
   const [dailyAnswer, setDailyAnswer] = useState(null);
   const [showDailyResult, setShowDailyResult] = useState(false);
   const [hasAnsweredToday, setHasAnsweredToday] = useState(false);
+  const [showBadgeCollection, setShowBadgeCollection] = useState(false);
 
   useEffect(() => {
     // Load badges from localStorage
@@ -288,7 +289,15 @@ export const Homepage = () => {
     setHasAnsweredToday(true);
     
     // Give participation badge
-    const newBadges = [...badges, { type: 'daily', emoji: '⭐', name: 'Daily Challenge!' }];
+    const newBadge = { 
+      type: 'daily', 
+      emoji: '⭐', 
+      name: 'Daily Challenge!', 
+      date: new Date().toLocaleString(),
+      description: 'Completed daily challenge question',
+      category: 'Daily'
+    };
+    const newBadges = [...badges, newBadge];
     setBadges(newBadges);
     localStorage.setItem('kidorbit-badges', JSON.stringify(newBadges));
   };
@@ -304,7 +313,7 @@ export const Homepage = () => {
   };
 
   const showBadges = () => {
-    alert(`Your Badges: ${badges.map(b => b.emoji + ' ' + b.name).join(', ') || 'No badges yet! Complete adventures to earn badges.'}`);
+    setShowBadgeCollection(true);
   };
 
   return (
