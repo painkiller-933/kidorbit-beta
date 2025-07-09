@@ -1029,7 +1029,9 @@ export const ResultPage = () => {
       career,
       emoji: careerData.badge,
       name: `${careerData.title} Expert!`,
-      date: new Date().toDateString()
+      date: new Date().toLocaleString(),
+      description: `Successfully completed the ${careerData.title} adventure and passed all quizzes!`,
+      category: 'Career Expert'
     };
     
     const updatedBadges = [...badges, newBadge];
