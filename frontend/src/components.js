@@ -483,6 +483,82 @@ export const Homepage = () => {
           </div>
         </div>
       )}
+      
+      {/* Badge Collection Modal */}
+      {showBadgeCollection && (
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
+          <div className="bg-white rounded-3xl p-8 max-w-4xl w-full max-h-[90vh] overflow-y-auto">
+            <div className="flex items-center justify-between mb-6">
+              <h2 className="text-3xl font-bold text-purple-700">🏆 Your Badge Collection</h2>
+              <button
+                onClick={() => setShowBadgeCollection(false)}
+                className="text-gray-500 hover:text-gray-700 text-2xl font-bold"
+              >
+                ×
+              </button>
+            </div>
+            
+            <div className="mb-6">
+              <div className="bg-gradient-to-r from-purple-100 to-pink-100 rounded-2xl p-4">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <h3 className="text-xl font-bold text-purple-700">Total Badges Earned</h3>
+                    <p className="text-3xl font-bold text-purple-900">{badges.length}</p>
+                  </div>
+                  <div className="text-5xl">🎉</div>
+                </div>
+              </div>
+            </div>
+            
+            {badges.length === 0 ? (
+              <div className="text-center py-12">
+                <div className="text-8xl mb-4">🎯</div>
+                <h3 className="text-2xl font-bold text-gray-600 mb-4">No badges yet!</h3>
+                <p className="text-gray-500 mb-6">Complete adventures and daily challenges to earn your first badge!</p>
+                <button
+                  onClick={() => setShowBadgeCollection(false)}
+                  className="bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white font-bold py-3 px-6 rounded-xl transition-all"
+                >
+                  Start Your Adventure! 🚀
+                </button>
+              </div>
+            ) : (
+              <div>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-6">
+                  {badges.map((badge, index) => (
+                    <div key={index} className="bg-gradient-to-br from-white to-gray-50 rounded-2xl p-6 shadow-lg border-2 border-gray-100 hover:shadow-xl transition-all">
+                      <div className="text-center">
+                        <div className="text-6xl mb-4">{badge.emoji}</div>
+                        <h3 className="text-xl font-bold text-gray-800 mb-2">{badge.name}</h3>
+                        <p className="text-gray-600 text-sm mb-3">{badge.description || 'Special achievement earned!'}</p>
+                        <div className="bg-gradient-to-r from-purple-100 to-pink-100 rounded-full px-3 py-1 text-sm font-semibold text-purple-700 mb-2">
+                          {badge.category || badge.type}
+                        </div>
+                        <div className="text-xs text-gray-500">
+                          Earned: {badge.date}
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+                
+                <div className="bg-gradient-to-r from-blue-100 to-purple-100 rounded-2xl p-6 text-center">
+                  <h3 className="text-xl font-bold text-purple-700 mb-2">Keep Going! 💪</h3>
+                  <p className="text-gray-700 mb-4">
+                    You're doing amazing! Complete more adventures to earn even more badges.
+                  </p>
+                  <button
+                    onClick={() => setShowBadgeCollection(false)}
+                    className="bg-gradient-to-r from-green-500 to-blue-500 hover:from-green-600 hover:to-blue-600 text-white font-bold py-3 px-6 rounded-xl transition-all"
+                  >
+                    Continue Adventure! 🌟
+                  </button>
+                </div>
+              </div>
+            )}
+          </div>
+        </div>
+      )}
     </div>
   );
 };
